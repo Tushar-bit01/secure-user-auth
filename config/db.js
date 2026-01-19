@@ -1,12 +1,14 @@
-const mongoose=require('mongoose');
+const mongoose = require('mongoose');
 
-function connectTodb(){
-    mongoose.connect(process.env.MONGO_URL)
-    .then(()=>{
-        console.log("db connected to nodejs");
+function connectTodb() {
+    
+    mongoose.connect(`mongodb://${process.env.MONGO_DB_USERNAME}:${process.env.MONGO_DB_PWD}@mongo:27017/DockerLearn?authSource=admin`)
+    .then(() => {
+        console.log(" DB connected to Node.js (Docker MongoDB)");
     })
-    .catch((error)=>{
-        console.log("failed to connect databse",err);
-    })
+    .catch((error) => {
+        console.log(" Failed to connect database:", error.message);
+    });
 }
-module.exports=connectTodb;
+
+module.exports = connectTodb;
